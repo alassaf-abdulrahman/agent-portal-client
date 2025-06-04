@@ -1,0 +1,130 @@
+<div
+  class="agent-details-container"
+  *ngIf="agent"
+  [attr.dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'"
+>
+  <h1 class="page-title">{{ "home_page.agent_detail" | translate }}</h1>
+
+  <div class="card-container">
+    <!-- Personal Information Card -->
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ "home_page.personal_info" | translate }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.agent_type" | translate
+          }}</span>
+          <span class="info-value">{{ agent.agentType }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.company_name" | translate
+          }}</span>
+          <span class="info-value">{{ agent.companyName }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{ "home_page.name" | translate }}</span>
+          <span class="info-value">{{ agent.name }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.person_in_charge" | translate
+          }}</span>
+          <span class="info-value">{{ agent.personInCharge }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.ic_passport" | translate
+          }}</span>
+          <span class="info-value">{{ agent.icOrPassportOrCompanyNo }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Location Information Card -->
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ "home_page.location_info" | translate }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.nationality" | translate
+          }}</span>
+          <span class="info-value">{{ agent.nationality }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.country_residence" | translate
+          }}</span>
+          <span class="info-value">{{ agent.countryOfResidence }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.corresponding_address" | translate
+          }}</span>
+          <span class="info-value">{{ agent.correspondingAddress }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information Card -->
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ "home_page.contact_info" | translate }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.mobile_number" | translate
+          }}</span>
+          <span class="info-value">{{ agent.mobileNumber }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.phone_number" | translate
+          }}</span>
+          <span class="info-value">{{ agent.phoneNumber }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{ "home_page.email" | translate }}</span>
+          <span class="info-value">{{ agent.email }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banking Information Card -->
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ "home_page.banking_info" | translate }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.bank_name" | translate
+          }}</span>
+          <span class="info-value">{{ agent.bankName }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.bank_account" | translate
+          }}</span>
+          <span class="info-value">{{ agent.bankAccountNumber }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{
+            "home_page.bank_swift" | translate
+          }}</span>
+          <span class="info-value">{{ agent.bankAccountSwiftCode }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Display a loading message when agent is null -->
+<div class="loading-message" *ngIf="!agent">
+  {{ "Loading agent details..." | translate }}
+</div>
