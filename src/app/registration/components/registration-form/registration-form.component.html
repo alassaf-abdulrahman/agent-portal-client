@@ -1,0 +1,326 @@
+<h2 style="text-align: center">
+  {{ "registration.apply_to_become_agent" | translate }}
+</h2>
+
+<form
+  [formGroup]="registrationFrom"
+  (ngSubmit)="onNext()"
+  *ngIf="!showSummary"
+  [attr.dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'"
+>
+  <!-- Agent Type -->
+  <div class="form-group">
+    <label>{{ "registration.agent_type" | translate }}</label>
+    <div class="radio-group">
+      <label
+        ><input type="radio" value="Individual" formControlName="agentType" />{{
+          "registration.individual_agent_type" | translate
+        }}</label
+      >
+      <label
+        ><input type="radio" value="Company" formControlName="agentType" />{{
+          "registration.company_agent_type" | translate
+        }}</label
+      >
+    </div>
+    <small class="text-danger">{{ getError("agentType") }}</small>
+  </div>
+
+  <!-- Name -->
+  <div class="form-group">
+    <label for="name">{{ "registration.name" | translate }}</label>
+    <input id="name" type="text" formControlName="name" />
+    <small class="text-danger">{{ getError("name") }}</small>
+  </div>
+
+  <!-- Company Details -->
+  <div *ngIf="registrationFrom.get('agentType')?.value === 'Company'">
+    <div class="form-group">
+      <label for="company-name">{{
+        "registration.company_name" | translate
+      }}</label>
+      <input id="company-name" type="text" formControlName="companyName" />
+      <small class="text-danger">{{ getError("companyName") }}</small>
+    </div>
+    <div class="form-group">
+      <label for="person-in-charge">{{
+        "registration.person_in_charge" | translate
+      }}</label>
+      <input
+        id="person-in-charge"
+        type="text"
+        formControlName="personInCharge"
+      />
+      <small class="text-danger">{{ getError("personInCharge") }}</small>
+    </div>
+  </div>
+
+  <!-- Nationality -->
+  <div class="form-group">
+    <label for="nationality">{{
+      "registration.nationality" | translate
+    }}</label>
+    <select id="nationality" formControlName="nationality">
+      <option value="">{{ "registration.please_select" | translate }}</option>
+      <option
+        *ngFor="let nationality of nationalities"
+        [value]="nationality.countryCode"
+      >
+        {{ nationality.nationalityName }}
+      </option>
+    </select>
+    <small class="text-danger">{{ getError("nationality") }}</small>
+  </div>
+
+  <!-- Residence Country -->
+  <div class="form-group">
+    <label for="residence-country">{{
+      "registration.residence_country" | translate
+    }}</label>
+    <select id="residence-country" formControlName="residenceCountry">
+      <option value="">{{ "registration.please_select" | translate }}</option>
+      <option *ngFor="let country of countries" [value]="country.countryCode">
+        {{ country.countryName }}
+      </option>
+    </select>
+    <small class="text-danger">{{ getError("residenceCountry") }}</small>
+  </div>
+
+  <!-- Foreigner in Malaysia -->
+  <div class="form-group">
+    <label>{{ "registration.foreigner_in_malaysia" | translate }}</label>
+    <div class="radio-group">
+      <label
+        ><input
+          type="radio"
+          value="true"
+          formControlName="isForeignerInMalaysia"
+        />{{ "registration.yes" | translate }}</label
+      >
+      <label
+        ><input
+          type="radio"
+          value="false"
+          formControlName="isForeignerInMalaysia"
+        />{{ "registration.no" | translate }}</label
+      >
+    </div>
+    <small class="text-danger">{{ getError("isForeignerInMalaysia") }}</small>
+  </div>
+
+  <!-- Visa Info -->
+  <div *ngIf="registrationFrom.get('isForeignerInMalaysia')?.value === 'true'">
+    <div class="form-group">
+      <label>{{ "registration.visa_type" | translate }}</label>
+      <div class="radio-group">
+        <label
+          ><input
+            type="radio"
+            value="independent"
+            formControlName="visaType"
+          />{{ "registration.visa_types.independent" | translate }}</label
+        >
+        <label
+          ><input
+            type="radio"
+            value="expatriate"
+            formControlName="visaType"
+          />{{ "registration.visa_types.expatriate" | translate }}</label
+        >
+        <label
+          ><input type="radio" value="student" formControlName="visaType" />{{
+            "registration.visa_types.student" | translate
+          }}</label
+        >
+        <label
+          ><input type="radio" value="others" formControlName="visaType" />{{
+            "registration.visa_types.others" | translate
+          }}</label
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="visa-expiry-date">{{
+        "registration.visa_expiry_date" | translate
+      }}</label>
+      <input
+        type="date"
+        id="visa-expiry-date"
+        formControlName="visaExpiryDate"
+      />
+      <small class="text-danger">{{ getError("visaExpiryDate") }}</small>
+    </div>
+    <div class="form-group">
+      <label for="last-arrival-date">
+        {{ "registration.last_arrival_date" | translate }}
+      </label>
+      <input
+        type="date"
+        id="last-arrival-date"
+        formControlName="lastArrivalDate"
+        [max]="minDate"
+      />
+
+      <small class="text-danger">{{ getError("lastArrivalDate") }}</small>
+    </div>
+  </div>
+
+  <!-- Address -->
+  <div class="form-group">
+    <label for="address">{{ "registration.address" | translate }}</label>
+    <input id="address" type="text" formControlName="address" />
+    <small class="text-danger">{{ getError("address") }}</small>
+  </div>
+
+  <!-- IC / Passport / Company No. -->
+  <div class="form-group">
+    <label for="ic-number">{{ "registration.ic_number" | translate }}</label>
+    <input id="ic-number" type="text" formControlName="icNumber" />
+    <small class="text-danger">{{ getError("icNumber") }}</small>
+  </div>
+
+  <!-- Mobile Number -->
+  <div class="form-group">
+    <label for="mobile-number">{{
+      "registration.mobile_number" | translate
+    }}</label>
+    <input id="mobile-number" type="text" formControlName="mobileNumber" />
+    <small class="text-danger">{{ getError("mobileNumber") }}</small>
+  </div>
+
+  <!-- Phone Number -->
+  <div class="form-group">
+    <label for="phone-number">{{
+      "registration.phone_number" | translate
+    }}</label>
+    <input id="phone-number" type="text" formControlName="phoneNumber" />
+    <small class="text-danger">{{ getError("phoneNumber") }}</small>
+  </div>
+
+  <!-- Email -->
+  <div class="form-group">
+    <label for="email">{{ "registration.email" | translate }}</label>
+    <input id="email" type="email" formControlName="email" />
+    <small class="text-danger">{{ getError("email") }}</small>
+  </div>
+
+  <!-- Bank Account Number -->
+  <div class="form-group">
+    <label for="bank-account-number">{{
+      "registration.bank_account_number" | translate
+    }}</label>
+    <input
+      id="bank-account-number"
+      type="text"
+      formControlName="bankAccountNumber"
+    />
+    <small class="text-danger">{{ getError("bankAccountNumber") }}</small>
+  </div>
+
+  <!-- Bank Name -->
+  <div class="form-group">
+    <label for="bank-name">{{ "registration.bank_name" | translate }}</label>
+    <input id="bank-name" type="text" formControlName="bankName" />
+    <small class="text-danger">{{ getError("bankName") }}</small>
+  </div>
+
+  <!-- Swift Code -->
+  <div class="form-group">
+    <label for="swift-code">{{ "registration.swift_code" | translate }}</label>
+    <input id="swift-code" type="text" formControlName="swiftCode" />
+    <small class="text-danger">{{ getError("swiftCode") }}</small>
+  </div>
+
+  <!-- Password -->
+  <div class="form-group">
+    <label for="password">{{ "registration.password" | translate }}</label>
+    <input id="password" type="password" formControlName="password" />
+    <small class="text-danger">{{ getError("password") }}</small>
+  </div>
+
+  <!-- Confirm Password -->
+  <div class="form-group">
+    <label for="confirmed-password">{{
+      "registration.confirm_password" | translate
+    }}</label>
+    <input
+      id="confirmed-password"
+      type="password"
+      formControlName="confirmedPassword"
+    />
+    <small class="text-danger">{{ getError("confirmedPassword") }}</small>
+    <small
+      class="text-danger"
+      *ngIf="
+        registrationFrom.hasError('passwordMissmatch') &&
+        registrationFrom.touched
+      "
+    >
+      {{ "registration.errors.passwords_not_match" | translate }}
+    </small>
+  </div>
+
+  <!-- File Upload -->
+  <div class="form-group">
+    <label for="document-upload">
+      {{ "registration.upload_passport_ic" | translate }}
+      <span *ngIf="registrationFrom.get('agentType')?.value === 'Company'">{{
+        "registration.upload_passport_ic_suffix" | translate
+      }}</span>
+    </label>
+    <input
+      type="file"
+      id="document-upload"
+      multiple
+      accept=".doc,.docx,.xls,.xlsx,.pdf,.jpg,.jpeg,.gif,.png,.ppt,.bmp,.zip"
+      (change)="onFilesSelected($event)"
+    />
+    <ul *ngIf="selectedFiles.length > 0">
+      <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+    </ul>
+    <small class="text-danger" *ngIf="fileErrorMessage">{{
+      fileErrorMessage
+    }}</small>
+  </div>
+
+  <button type="submit">{{ "registration.next" | translate }}</button>
+</form>
+
+<!-- Summary -->
+<div
+  class="summary-container"
+  *ngIf="showSummary"
+  [attr.dir]="translate.currentLang === 'ar' ? 'rtl' : 'ltr'"
+  [ngClass]="{ 'rtl-align': translate.currentLang === 'ar' }"
+>
+  <h2>
+    {{ "registration.application_summary" | translate }}
+  </h2>
+  <table class="summary-table">
+    <tr *ngFor="let field of getSummaryFields()">
+      <td>{{ field.label }}</td>
+      <td>{{ field.value }}</td>
+    </tr>
+  </table>
+
+  <div class="terms-container">
+    <input type="checkbox" id="terms" [(ngModel)]="termsAccepted" />
+    <label for="terms">
+      {{ "registration.terms_and_conditions" | translate }}
+      <a
+        target="_blank"
+        href="https://online.mediu.edu.my/agentportal/Content/Docs/Terms/Agent'sAgreement-international.pdf"
+      >
+        {{ "registration.terms_and_conditions_link" | translate }}
+      </a>
+      {{ "registration.terms_and_conditions_cont" | translate }}
+    </label>
+  </div>
+
+  <div class="btns">
+    <button (click)="onBack()">{{ "registration.back" | translate }}</button>
+    <button (click)="onSubmit()" [disabled]="!termsAccepted">
+      {{ "registration.submit" | translate }}
+    </button>
+  </div>
+</div>
