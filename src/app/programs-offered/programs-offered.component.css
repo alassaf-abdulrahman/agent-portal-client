@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  background-color: #c5c5c5;
+  font-family: Arial, sans-serif;
+}
+
+.header-banner {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.program-container {
+  background-color: white;
+  border-radius: 20px;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 50px 40px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.program-header {
+  background-color: #ed4e39;
+  padding: 8px 16px; /* smaller box */
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  margin: -30px -20px 20px -20px; /* reduced width */
+}
+
+.program-header .icon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.button-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.program-button {
+  padding: 14px 28px;
+  background-color: #7b3736;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.program-button:hover {
+  background-color: #5e2928;
+}
+
+.footer {
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}

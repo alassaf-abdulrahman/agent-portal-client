@@ -1,0 +1,24 @@
+<div class="program-container">
+  <div class="program-header">
+    <span class="icon">📚</span>
+    <h2>{{ "programs_offered.title" | translate }}</h2>
+  </div>
+
+  <p class="description">
+    {{ "programs_offered.description" | translate }}
+  </p>
+
+  <div class="button-list">
+    <a
+      *ngFor="let program of programs"
+      [href]="program.url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="program-button"
+    >
+      {{ program.key | translate }}
+    </a>
+  </div>
+
+  <footer class="footer">© 2025 – Agent Portal</footer>
+</div>
