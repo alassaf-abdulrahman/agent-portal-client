@@ -8,7 +8,9 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { RegistrationFormComponent } from './registration/components/registration-form/registration-form.component';
+import { HomeComponent } from './home/home.component';
 import { ProgramsOfferedComponent } from './programs-offered/programs-offered.component';
+
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './i18n/', '.json');
 
@@ -16,6 +18,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: Http
   declarations: [
     AppComponent,
     RegistrationFormComponent,
+    HomeComponent,
     ProgramsOfferedComponent
   ],
   imports: [
